@@ -5,8 +5,6 @@ import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import sanitizer from "express-mongo-sanitize";
 import xss from "xss-clean";
-// import PropertyRouter from "./routes/property.routes";
-import path from "path";
 import { notFoundHandler } from "./middlewares/not-found.middleware";
 import { errorHandler } from "./middlewares/error-handler.middleware";
 import { TodoRouter } from "./routes";
@@ -27,7 +25,6 @@ var corsOptionsDelegate = function (
 app.use(cors(corsOptionsDelegate));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(upload.array());
 app.use(sanitizer());
 app.use(xss());
 app.use(express.static("public"));
