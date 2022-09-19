@@ -9,11 +9,17 @@ type Props = {
   text?: string;
   type?: "submit" | "button";
   onClick?: () => void;
+  isLoading?: boolean;
 };
-const CustomButton = ({ text, type = "button", onClick }: Props) => {
+const CustomButton = ({
+  text,
+  type = "button",
+  onClick,
+  isLoading = false,
+}: Props) => {
   return (
-    <BaseButton type={type} onClick={onClick}>
-      {text}
+    <BaseButton type={type} onClick={onClick} disabled={isLoading}>
+      {isLoading ? "processing ..." : text}
     </BaseButton>
   );
 };

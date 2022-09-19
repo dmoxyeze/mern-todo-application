@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { TodoContext } from "../../context/todo.context";
@@ -22,7 +22,6 @@ const TodoList = () => {
       {todos.map((todo) => (
         <TodoItem todo={todo} key={todo._id} />
       ))}
-      <Modal />
     </Container>
   );
 };

@@ -13,6 +13,7 @@ const FormWrapper = styled.div`
 `;
 const CreateTodoForm = () => {
   const { addTodo } = useContext(TodoContext);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -27,6 +28,7 @@ const CreateTodoForm = () => {
   };
   const createTodo = async () => {
     const payload = data;
+    setLoading(true);
     try {
       const { data } = await createTodoService({ ...payload });
       //validation error occured
@@ -43,6 +45,7 @@ const CreateTodoForm = () => {
     } catch (error: any) {
       alert(error.message);
     }
+    setLoading(false);
   };
   return (
     <FormWrapper>
@@ -67,7 +70,7 @@ const CreateTodoForm = () => {
         />
       </FormContainer>
       <FormContainer>
-        <CustomButton text="Submit" onClick={createTodo} />
+        <CustomButton text="Submit" isLoading={loading} onClick={createTodo} />
       </FormContainer>
     </FormWrapper>
   );

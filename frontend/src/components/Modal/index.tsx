@@ -1,73 +1,102 @@
-import React, { ReactNode, useState } from "react";
+import React, { ChangeEvent, ReactNode, useContext, useState } from "react";
+import { TodoContext } from "../../context/todo.context";
+import { Todo } from "../../interfaces/todo";
+import { updateTodoService } from "../../services";
+import CustomButton from "../CustomButton";
+import { FormContainer } from "../FormContainer";
+import { FormLabel } from "../FormLabel";
+import TextInput from "../TextInput";
 
 type Props = {
-  children?: ReactNode;
+  todo: Todo;
+  setVisibility: () => void;
+  visibility: boolean;
 };
-const Modal = ({ children }: Props) => {
-  const [showModal, setShowModal] = useState(false);
+const Modal = ({ todo, setVisibility, visibility }: Props) => {
+  const { updateTodo } = useContext(TodoContext);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({
+    title: todo.title,
+    description: todo.description,
+  });
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+  });
+  const handleChange = (e: ChangeEvent, field: string) => {
+    setErrors({ ...errors, [field]: "" });
+    setData({ ...data, [field]: (e.target as HTMLInputElement).value });
+  };
+  const handleSubmit = async () => {
+    setLoading(true);
+    const payload: any = { ...data };
+    payload.id = todo._id;
+    try {
+      const { data } = await updateTodoService({ ...payload });
+      //validation error occured
+      if (data.error) {
+        let response = data.error.error;
+        setErrors(response);
+      } else {
+        updateTodo(data.data.todo);
+        setVisibility();
+      }
+    } catch (error: any) {
+      alert(error.message);
+    }
+    setLoading(false);
+  };
   return (
     <>
-      <button
-        className="bg-blue-200 text-black active:bg-blue-500 
-            font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Fill Details
-      </button>
-      {showModal ? (
+      {visibility ? (
         <>
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none transition-all">
+            <div className="flex items-center my-6 mx-auto w-full md:max-w-xl absolute inset-0">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-3xl font=semibold">General Info</h3>
-                  <button
-                    className="bg-transparent border-0 text-black float-right"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
-                      x
-                    </span>
-                  </button>
-                </div>
                 <div className="relative p-6 flex-auto">
-                  <form className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full">
-                    <label className="block text-black text-sm font-bold mb-1">
-                      First Name
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
-                    <label className="block text-black text-sm font-bold mb-1">
-                      Last Name
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
-                    <label className="block text-black text-sm font-bold mb-1">
-                      Address
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
-                    <label className="block text-black text-sm font-bold mb-1">
-                      City
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
-                  </form>
+                  <FormContainer>
+                    <FormLabel title="Title" />
+                    <TextInput
+                      hasError={errors.title !== ""}
+                      error={errors.title}
+                      value={data.title}
+                      placeholder="Enter a title for the task"
+                      onChange={(e: ChangeEvent) => handleChange(e, "title")}
+                    />
+                  </FormContainer>
+                  <FormContainer>
+                    <FormLabel title="Description" />
+                    <TextInput
+                      hasError={errors.description !== ""}
+                      error={errors.description}
+                      value={data.description}
+                      placeholder="Enter a small description for the task"
+                      onChange={(e: ChangeEvent) =>
+                        handleChange(e, "description")
+                      }
+                    />
+                  </FormContainer>
+                  <FormContainer>
+                    <CustomButton
+                      isLoading={loading}
+                      text="Submit"
+                      onClick={handleSubmit}
+                    />
+                  </FormContainer>
                 </div>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                    className="text-white bg-red-600 font-bold capitalize px-6 py-2 text-sm outline-none rounded focus:outline-none mr-1 mb-1"
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={setVisibility}
                   >
                     Close
                   </button>
-                  <button
-                    className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Submit
-                  </button>
                 </div>
               </div>
+            </div>
+            <div className="">
+              <div className="bg-[rgb(0,0,0)] inset-0 z-[-1] opacity-75 fixed"></div>
             </div>
           </div>
         </>

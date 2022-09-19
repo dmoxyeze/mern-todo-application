@@ -55,14 +55,16 @@ class TodoController {
     // });
   }
   async updateTodo(req: Request, res: Response, next: NextFunction) {
-    const todo = await Todo.findById(req.params.id);
+    const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!todo) {
       return next(new HttpException("Task with that Id does not exist!", 404));
     }
-    todo.title = req.body.title;
-    todo.description = req.body.description;
-    todo.status = req.body.status;
-    await todo.save();
+    // todo.title = req.body.title;
+    // todo.description = req.body.description;
+    // todo.status = req.body.status;
+    // await todo.updateOne(req.body);
 
     res.status(200).json({
       success: true,

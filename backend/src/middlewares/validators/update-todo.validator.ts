@@ -34,15 +34,15 @@ const ValidateUpdateToDoRequest = (
         .withMessage(
           "Description must be equal to or greater than 10 characters"
         ),
-      check("status")
-        .exists({
-          checkFalsy: true,
-          checkNull: true,
-        })
-        .withMessage("Status is required")
-        .custom((value) => {
-          return TODO_STATE.includes(value);
-        }),
+      // check("status")
+      //   .exists({
+      //     checkFalsy: true,
+      //     checkNull: true,
+      //   })
+      //   .withMessage("Status is required")
+      //   .custom((value) => {
+      //     return TODO_STATE.includes(value);
+      //   }),
     ],
     req,
     res,
