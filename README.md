@@ -14,7 +14,9 @@
 <p>
     ## For Front End:
 
-- Go back to the root directory of the project, and run this command from your cmd line or terminal; `cd frontend && npm install && npm start`.
+- Enter into the frontend directory(the folder labelled frontend) of the project
+- create .env file and provide the base url of your Node JS backend service in the format `REACT_APP_API_URL=http://<my-api-url>`
+- run this command to start your development server `npm install && npm start`.
 - run `npm run build` for production build.
 - visit http://localhost:3000 to view you todo App
 
