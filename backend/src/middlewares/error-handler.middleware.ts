@@ -52,21 +52,13 @@ const sendErrorDev = (err: any, res: Response) => {
 };
 
 const sendErrorProd = (err: any, res: Response) => {
-  if (err.isOperationalError) {
-    // logger.error(err.details);
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.details,
-      errors: err.errors,
-    });
-  } else {
-    // logger.error("An error has occured!");
-    res.status(500).json({
-      status: false,
-      errors: err.errors,
-      message: "An error occurred!",
-    });
-  }
+  // logger.error(err.details);
+  res.status(err.statusCode).json({
+    status: err.status,
+    error: err,
+    message: err.details,
+    errors: err.errors,
+  });
 };
 
 export const errorHandler = (
