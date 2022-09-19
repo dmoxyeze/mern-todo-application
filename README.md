@@ -14,8 +14,9 @@
 <p>
     ## For Front End:
 
-- Enter into the frontend direcory from your cmd line terminal,`cd frontend && npm install && npm start`.
+- Go back to the root directory of the project, and run this command from your cmd line or terminal; `cd frontend && npm install && npm start`.
 - run `npm run build` for production build.
+- visit http://localhost:3000 to view you todo App
 
 </p>
 <p align="">
