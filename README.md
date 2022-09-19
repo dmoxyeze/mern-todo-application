@@ -11,6 +11,13 @@
  - use `npm run build` to build for production
  - visit http://localhost:8080
         if everything is fine at this point, you see the message "You have reached Todo api home page".
+<p>
+    ## For Front End:
+
+- Enter into the frontend direcory from your cmd line terminal,`cd frontend && npm install && npm start`.
+- run `npm run build` for production build.
+
+</p>
 <p align="">
     <h3>Features:</h3>
 
@@ -30,3 +37,13 @@
 - MongoDB
 - Typescript
 - Mocha for unit testing
+
+    ## For Frontend:
+
+- React
+- Typescript
+- Context API
+- TailwindCss
+- Axios
+- styled-components
+- twin.macro

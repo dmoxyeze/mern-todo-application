@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useContext, useState } from "react";
+import { ChangeEvent, useContext, useRef, useState } from "react";
 import { TodoContext } from "../../context/todo.context";
 import { Todo } from "../../interfaces/todo";
 import { updateTodoService } from "../../services";
@@ -13,6 +13,7 @@ type Props = {
   visibility: boolean;
 };
 const Modal = ({ todo, setVisibility, visibility }: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
   const { updateTodo } = useContext(TodoContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
