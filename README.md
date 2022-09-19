@@ -1,7 +1,7 @@
 <h1 align="center">A simple MERN stack Todo application</h1>
 
 <h3>Demo</h3>
-<a href="https://dmoxyeze.github.io">https://dmoxyeze.github.io</a>
+<a href="https://dmoxyeze.github.io/todo-app-demo/">https://dmoxyeze.github.io/todo-app-demo/</a>
 
 <h3>Installation Instruction</h3>
     ## from your cmd line or terminal:
