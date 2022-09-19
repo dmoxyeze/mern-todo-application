@@ -9,8 +9,8 @@ automatic_scaling:
   max_pending_latency: automatic
 
 env_variables:
-  MONGO_DB_URL: "mongodb+srv://success:21Computer@cluster0.urj3nyz.mongodb.net/todo?retryWrites=true&w=majority"
-  MONGO_DB_TEST_URL: "mongodb+srv://success:21Computer@cluster0.urj3nyz.mongodb.net/?retryWrites=true&w=majority"
+  MONGO_DB_URL: "mongodb+srv://<your-mongo-db-url>"
+  MONGO_DB_TEST_URL: "mongodb+srv://<your-mongo-db-test-database-url>"
   PORT: 8080
   APP_NAME: "Todo App"
-  FRONT_END_URL: "https://dmoxyeze.github.io"
+  FRONT_END_URL: "your-front-end-url"
