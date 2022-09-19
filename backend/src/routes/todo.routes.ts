@@ -15,7 +15,7 @@ TodoRouter.route("/:id")
   .get(catchAsync(TodoController.getTodoById))
   .patch(ValidateUpdateToDoRequest, catchAsync(TodoController.updateTodo))
   .delete(catchAsync(TodoController.deleteTodo));
-TodoRouter.route("/:id/update-status").patch(
+TodoRouter.route("/update-status/:id").patch(
   catchAsync(TodoController.updateStatus)
 );
 export default TodoRouter;
