@@ -2,3 +2,4 @@ node_modules
 backend/app.yaml
 build
 .env
+backend/main.yaml

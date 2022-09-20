@@ -67,7 +67,7 @@ export const errorHandler = (
   response: Response,
   next: NextFunction
 ) => {
-  error.statusCode = error.statusCode || 500;
+  error.statusCode = error.statusCode;
   error.errors = error.errors || null;
   if (process.env.NODE_ENV === "development") {
     sendErrorDev(error, response);

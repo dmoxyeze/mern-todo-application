@@ -42,6 +42,7 @@
 - MongoDB
 - Typescript
 - Mocha for unit testing
+- Google App Engine for Hosting
 
     ## For Frontend:
 
