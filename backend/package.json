@@ -1,5 +1,5 @@
 {
-  "name": "todo-application",
+  "name": "@dmoxyeze-todo-application/backend",
   "version": "1.0.0",
   "description": "A simple todo application written in typescript with Node JS",
   "main": "src/index.ts",
@@ -41,6 +41,6 @@
     "ts-node-dev": "^2.0.0"
   },
   "engines": {
-    "node": "^16.15.0"
+    "node": ">=16.15.0"
   }
 }
