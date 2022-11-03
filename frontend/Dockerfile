@@ -4,15 +4,11 @@ FROM node:18-slim as builder
 COPY package.json /srv/package.json
 COPY yarn.lock /srv/yarn.lock
 
-
-COPY backend /srv/backend/
 COPY frontend /srv/frontend/
 
 WORKDIR /srv
 RUN yarn install --frozen-lockfile
 
-WORKDIR /srv/backend
-RUN yarn build
 
 WORKDIR /srv/frontend
 RUN yarn build
