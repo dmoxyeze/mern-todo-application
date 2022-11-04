@@ -18,6 +18,7 @@
 
 - Enter into the frontend directory(the folder labelled frontend) of the project
 - create .env file and provide the base url of your Node JS backend service in the format `REACT_APP_API_URL=http://<my-api-url>`
+- add your API URL to `src/constants.ts`
 - run this command to start your development server `npm install && npm start`.
 - run `npm run build` for production build.
 - visit http://localhost:3000 to view you todo App

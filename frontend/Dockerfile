@@ -1,27 +1,27 @@
 ## TEMP BUILD
 FROM node:18-slim as builder
 
-COPY package.json /srv/package.json
-COPY yarn.lock /srv/yarn.lock
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
 
-COPY frontend /srv/frontend/
+COPY frontend /app/frontend/
 
-WORKDIR /srv
+WORKDIR /app
 RUN yarn install --frozen-lockfile
 
 
-WORKDIR /srv/frontend
+WORKDIR /app/frontend
 RUN yarn build
 
 RUN yarn install --frozen-lockfile --production --ignore-scripts
 
 ## BUILD APP
 FROM node:18-slim
-COPY --from=builder /srv /srv
+COPY --from=builder /app /app
 
-WORKDIR /srv/frontend
+WORKDIR /app/frontend
 
 ENV NODE_ENV=production
 
 
-CMD [ "node" , "./build/index.js", "--port", "3000" ]
+CMD [ "/usr/local/bin/yarn", "run", "serve", "--port", "3000" ]
