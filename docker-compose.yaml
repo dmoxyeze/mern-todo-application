@@ -2,18 +2,24 @@ version: '3.8'
 
 services:
   frontend:
-    image: frontend-todo
+    image: frontend-new
+    volumes:
+      - .:/frontend
     stdin_open: true
     ports:
-      - 3000:3000
+      - '3000:3000'
     networks:
         - mern-todo-app
     command: [ "/usr/local/bin/yarn", "run", "serve", "--port", "3000" ]
 
   backend:
-    image: backend
+    image: backend-todo
+    volumes:
+      - .:/backend
+    env_file:
+      - backend/.env
     ports:
-      - 8080:8080
+      - '8080:8080'
     networks:
         - mern-todo-app
     depends_on:
@@ -23,7 +29,7 @@ services:
   mongo:
       image: mongo
       ports:
-        - 27018:27017
+        - "27018:27017"
       networks:
         - mern-todo-app
       volumes:

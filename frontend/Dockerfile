@@ -11,6 +11,7 @@ RUN yarn install --frozen-lockfile
 
 
 WORKDIR /app/frontend
+ENV REACT_APP_API_URL=http://localhost:8080
 RUN yarn build
 
 RUN yarn install --frozen-lockfile --production --ignore-scripts
@@ -21,7 +22,8 @@ COPY --from=builder /app /app
 
 WORKDIR /app/frontend
 
-ENV NODE_ENV=production
 
+ENV NODE_ENV=production
+EXPOSE 3000
 
 CMD [ "/usr/local/bin/yarn", "run", "serve", "--port", "3000" ]
