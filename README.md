@@ -13,9 +13,10 @@
 - create .env file and provide the base url of your Node JS backend service in the format `REACT_APP_API_URL=http://<my-api-url>`
 - add your API URL to `src/constants.ts`
  
- # This project uses namespace and npm-run-all, so you do not need to start the backend and frontend
- services separately.
+ <h4>This project uses namespace and npm-run-all, so you do not need to start the backend and frontend
+ services separately.</h4>
     To start both services, go back to the root directory in your terminal, and:
+    
  - run `yarn dev`, to start the local server
  - use `yarn test` to run tests
  - use `yarn build` to build for production
